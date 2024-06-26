@@ -1,0 +1,18 @@
+{
+  "dependencies": {
+    "@woocommerce/woocommerce-rest-api": "^1.0.1",
+    "axios": "^1.7.2",
+    "crypto": "^1.0.1",
+    "dotenv": "^16.4.5",
+    "querystring": "^0.2.1"
+  },
+  "name": "ordercreation",
+  "version": "1.0.0",
+  "main": "getProducts.js",
+  "scripts": {
+    "start": "node getProducts.js"
+  },
+  "author": "razal",
+  "license": "ISC",
+  "description": ""
+}
