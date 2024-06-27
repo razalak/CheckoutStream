@@ -82,10 +82,10 @@ CheckoutStream allows customers to place orders through a chat interface. The sy
 2. Open the frontend application in your browser.
 3. Interact with the chat interface by entering order details in the specified format:
     ```
-    Name: John Doe,
-    Email: johndoe@example.com,
+    Name: Sanu muhammed,
+    Email: sanuue@example.com,
     Phone: 123-456-7890,
-    Address: 123 Main St Springfield,
+    Address: chaliyam kozhikode,
     Pincode: 12345
     ```
 4. The backend will process the message and create an order in WooCommerce if the data is valid.
@@ -107,6 +107,6 @@ Handles incoming messages from the frontend chat interface and processes them to
 
 ```json
 {
-  "message": "Name: John Doe, Email: johndoe@example.com, Phone: 123-456-7890, Address: 123 Main St Springfield, Pincode: 12345"
+  "message": "Name: Sanu muhammed, Email: sanue@example.com, Phone: 123-456-7890, Address: CHaliyam kozhikode, Pincode: 12345"
 }
 
