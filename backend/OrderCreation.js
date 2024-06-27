@@ -4,9 +4,9 @@ const axios = require('axios');
 const https = require('https');
 require('dotenv').config();
 
-const url2 =process.env.URL2;
-const consumerKey = process.env.CONSUMER_KEY;
-const consumerSecret = process.env.CONSUMER_SECRET;
+const url =process.env.URL;                          //provide your url key in the env file
+const consumerKey = process.env.CONSUMER_KEY;         //provide your actual conumer key in the env file
+const consumerSecret = process.env.CONSUMER_SECRET;   //provide your actual conumer secret in the env file
 
 const createOrder = async (orderData) => {
   try {
@@ -16,7 +16,7 @@ const createOrder = async (orderData) => {
     }
 
     // Make POST request to create order
-    const response = await axios.post(url2, orderData, {
+    const response = await axios.post(url, orderData, {
       headers: {
         'Content-Type': 'application/json'
       },

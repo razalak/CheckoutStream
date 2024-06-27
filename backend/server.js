@@ -10,7 +10,9 @@ app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 const extractOrderData = (message) => {
+
     // Regular expressions to match different fields
+
     const fieldMatchers = {
         Name: /Name:\s*([\w\s]+)\s*,/,
         Email: /Email:\s*([\w.-]+@[\w.-]+\.[\w.-]+)\s*,/,
@@ -62,6 +64,7 @@ const extractOrderData = (message) => {
     };
 
     // Function to assign matched data to orderData
+
     const assignData = (field, value) => {
         switch (field) {
             case 'Name':
@@ -92,7 +95,11 @@ const extractOrderData = (message) => {
         }
     };
 
+
+
     // Extract and assign data based on field matchers
+
+
     Object.entries(fieldMatchers).forEach(([field, regex]) => {
         const match = message.match(regex);
         if (match) {
@@ -100,7 +107,9 @@ const extractOrderData = (message) => {
         }
     });
 
+
     // Copy billing data to shipping if shipping is not fully populated
+
     if (!orderData.shipping.first_name) {
         orderData.shipping.first_name = orderData.billing.first_name;
     }
@@ -123,8 +132,16 @@ const extractOrderData = (message) => {
         orderData.shipping.state = orderData.billing.state;
     }
 
+
+
+
+
     // Logging orderData to console for debugging
     console.log('Order Data:', orderData);
+
+
+
+
 
     // Return orderData or null if any required data is missing
     if (!orderData.billing.first_name || !orderData.billing.email || !orderData.billing.phone || !orderData.billing.address_1) {
@@ -135,6 +152,8 @@ const extractOrderData = (message) => {
 };
 
 // Route to handle incoming messages and create orders
+
+
 app.post('/api/message', async (req, res) => {
     const { message } = req.body;
   
@@ -157,6 +176,8 @@ app.post('/api/message', async (req, res) => {
   
 
 // Start server
+
+
 app.listen(port, () => {
   console.log(`Backend server running at http://localhost:${port}`);
 });
