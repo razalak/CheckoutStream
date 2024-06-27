@@ -10,13 +10,21 @@ const ChatInterface = () => {
     setMessages([...messages, { text: message, fromUser: true }]);
 
     try {
-      await axios.post('http://localhost:5000/api/message', {
+      const response = await axios.post('http://localhost:5000/api/message', {
         message: message
       });
 
-      // Do not update state with bot's response
+      // Assuming success response contains a message field
+      if (response.data.message) {
+        setMessages(prevMessages => [...prevMessages, { text: response.data.message, fromUser: false }]);
+      }
     } catch (error) {
-      console.error('Error sending message to backend:', error);
+      // If there's an error response, display the error message
+      if (error.response && error.response.data && error.response.data.error) {
+        setMessages(prevMessages => [...prevMessages, { text: error.response.data.error, fromUser: false }]);
+      } else {
+        console.error('Error sending message to backend:', error);
+      }
     }
   };
 
