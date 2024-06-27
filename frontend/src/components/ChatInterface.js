@@ -28,12 +28,20 @@ const ChatInterface = () => {
     }
   };
 
+  
   return (
     <div style={styles.chatContainer}>
       <div style={styles.messagesContainer}>
         {messages.map((msg, index) => (
-          <div key={index} style={{ ...styles.message, textAlign: msg.fromUser ? 'right' : 'left' }}>
-            <strong>{msg.fromUser ? 'You' : 'Bot'}</strong>: {msg.text}
+          <div
+            key={index}
+            style={{
+              ...styles.message,
+              textAlign: msg.fromUser ? 'right' : 'left',
+              backgroundColor: msg.fromUser ? '#e1ffc7' : '#ffa500' // Orange color for bot messages
+            }}
+          >
+            <strong>{msg.fromUser ? 'You' : 'Server'}</strong>: {msg.text}
           </div>
         ))}
       </div>
@@ -56,7 +64,7 @@ const styles = {
   chatContainer: {
     width: '100%',
     maxWidth: '480px', // Suitable for mobile screens
-    margin: '20px auto', // Add some margin to center the chat box vertically
+    margin: '120px auto 20px auto', // Add margin-top to lower the chat box
     border: '1px solid #ccc',
     borderRadius: '8px',
     overflow: 'hidden',
@@ -74,7 +82,6 @@ const styles = {
     marginBottom: '10px',
     padding: '8px',
     borderRadius: '4px',
-    backgroundColor: '#e1ffc7',
     maxWidth: '75%',
     wordBreak: 'break-word'
   },
