@@ -136,24 +136,25 @@ const extractOrderData = (message) => {
 
 // Route to handle incoming messages and create orders
 app.post('/api/message', async (req, res) => {
-  const { message } = req.body;
-
-  try {
-    // Extract order data using regular expressions
-    const orderData = extractOrderData(message);
-
-    if (!orderData) {
-      return res.status(400).json({ error: 'Invalid message format. Missing required fields.' });
+    const { message } = req.body;
+  
+    try {
+      // Extract order data using regular expressions
+      const orderData = extractOrderData(message);
+  
+      if (!orderData) {
+        return res.status(400).json({ error: 'Invalid data....Please provide the datas in the specified structure without missing anything!!!!!' });
+      }
+  
+      // Create order using WooCommerce API
+      const orderResponse = await createOrder(orderData);
+      res.json({ message: 'Order created successfully', orderResponse });
+    } catch (error) {
+      console.error('Error creating order:', error);
+      res.status(500).json({ error: 'Failed to create order' });
     }
-
-    // Create order using WooCommerce API
-    const orderResponse = await createOrder(orderData);
-    res.json({ message: 'Order created successfully', orderResponse });
-  } catch (error) {
-    console.error('Error creating order:', error);
-    res.status(500).json({ error: 'Failed to create order' });
-  }
-});
+  });
+  
 
 // Start server
 app.listen(port, () => {
