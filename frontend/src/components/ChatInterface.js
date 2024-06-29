@@ -1,13 +1,13 @@
-// src/components/ChatInterface.js
-
 import React, { useState } from 'react';
 import axios from 'axios';
 
 const ChatInterface = () => {
   const [messages, setMessages] = useState([]);
+  const [errorMessage, setErrorMessage] = useState('');
 
   const handleSendMessage = async (message) => {
     setMessages([...messages, { text: message, fromUser: true }]);
+    setErrorMessage('');
 
     try {
       const response = await axios.post('http://localhost:5000/api/message', {
@@ -15,22 +15,20 @@ const ChatInterface = () => {
       });
 
       // Assuming success response contains a message field
-
       if (response.data.message) {
         setMessages(prevMessages => [...prevMessages, { text: response.data.message, fromUser: false }]);
       }
     } catch (error) {
       // If there's an error response, display the error message
-
       if (error.response && error.response.data && error.response.data.error) {
         setMessages(prevMessages => [...prevMessages, { text: error.response.data.error, fromUser: false }]);
       } else {
         console.error('Error sending message to backend:', error);
+        setErrorMessage('Error sending message to the backend. Please try again.');
       }
     }
   };
 
-  
   return (
     <div style={styles.chatContainer}>
       <div style={styles.messagesContainer}>
@@ -47,6 +45,7 @@ const ChatInterface = () => {
           </div>
         ))}
       </div>
+      {errorMessage && <div style={styles.error}>{errorMessage}</div>}
       <input
         type="text"
         placeholder="Type your message..."
@@ -61,8 +60,6 @@ const ChatInterface = () => {
     </div>
   );
 };
-
-
 
 const styles = {
   chatContainer: {
@@ -95,6 +92,11 @@ const styles = {
     border: 'none',
     borderTop: '1px solid #ccc',
     outline: 'none'
+  },
+  error: {
+    color: 'red',
+    textAlign: 'center',
+    margin: '10px 0'
   }
 };
 
