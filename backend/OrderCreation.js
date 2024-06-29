@@ -4,9 +4,9 @@ const axios = require('axios');
 const https = require('https');
 require('dotenv').config();
 
-const url =process.env.URL;                          //provide your url key in the env file
-const consumerKey = process.env.CONSUMER_KEY;         //provide your actual conumer key in the env file
-const consumerSecret = process.env.CONSUMER_SECRET;   //provide your actual conumer secret in the env file
+const url = process.env.URL; // Provide your URL key in the .env file
+const consumerKey = process.env.CONSUMER_KEY; // Provide your actual consumer key in the .env file
+const consumerSecret = process.env.CONSUMER_SECRET; // Provide your actual consumer secret in the .env file
 
 const createOrder = async (orderData) => {
   try {
@@ -46,8 +46,11 @@ const isValidOrderData = (orderData) => {
     orderData.shipping &&
     orderData.shipping.first_name &&
     orderData.shipping.address_1 &&
-    orderData.shipping.city
-    // Add more validation as needed
+    orderData.shipping.city &&
+    orderData.line_items &&
+    orderData.line_items.length > 0 &&
+    orderData.line_items[0].product_id &&
+    orderData.line_items[0].quantity
   );
 };
 
