@@ -3,7 +3,14 @@ import axios from 'axios';
 import './ChatInterface.css'; // Import CSS file for ChatInterface
 
 const ChatInterface = () => {
-  const [messages, setMessages] = useState([{ text: 'Type Order details in the specified structure........', fromUser: false }]);
+     const [messages, setMessages] = useState([
+    { text: 'Type Order details in the specified structure........', fromUser: false },
+      { 
+      text: `Type in this format:\n Name: Sanu Muhammed,\n Email: sanu@7777.com,\n Phone: 1234567891,\n Address: chaliyam feroke,\n Pincode: 745621,\n Productid: 2580,\n Quantity: 2`, 
+      fromUser: false 
+       }
+     ]);
+
   const [errorMessage, setErrorMessage] = useState('');
 
   const handleSendMessage = async (message) => {

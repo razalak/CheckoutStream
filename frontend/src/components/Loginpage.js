@@ -44,7 +44,7 @@ const Login = ({ onLogin }) => {
   // Render login form otherwise
   return (
     <div className="login-container">
-      <h2>Login</h2>
+      <h2>Admin Login</h2>
       <form onSubmit={handleSignIn} className="login-form">
         <div className="form-group">
           <label>Email:</label>
