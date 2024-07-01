@@ -1,8 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import './ChatInterface.css'; // Import CSS file for ChatInterface
 
 const ChatInterface = () => {
-  const [messages, setMessages] = useState([]);
+  const [messages, setMessages] = useState([{ text: 'Type Order details in the specified structure........', fromUser: false }]);
   const [errorMessage, setErrorMessage] = useState('');
 
   const handleSendMessage = async (message) => {
@@ -30,22 +31,18 @@ const ChatInterface = () => {
   };
 
   return (
-    <div style={styles.chatContainer}>
-      <div style={styles.messagesContainer}>
+    <div className="chat-container">
+      <div className="messages-container">
         {messages.map((msg, index) => (
           <div
             key={index}
-            style={{
-              ...styles.message,
-              textAlign: msg.fromUser ? 'right' : 'left',
-              backgroundColor: msg.fromUser ? '#e1ffc7' : '#ffa500' // Orange color for bot messages
-            }}
+            className={`message ${msg.fromUser ? 'user-message' : 'server-message'}`}
           >
             <strong>{msg.fromUser ? 'You' : 'Server'}</strong>: {msg.text}
           </div>
         ))}
       </div>
-      {errorMessage && <div style={styles.error}>{errorMessage}</div>}
+      {errorMessage && <div className="error">{errorMessage}</div>}
       <input
         type="text"
         placeholder="Type your message..."
@@ -55,49 +52,10 @@ const ChatInterface = () => {
             e.target.value = '';
           }
         }}
-        style={styles.input}
+        className="input"
       />
     </div>
   );
-};
-
-const styles = {
-  chatContainer: {
-    width: '100%',
-    maxWidth: '480px', // Suitable for mobile screens
-    margin: '120px auto 20px auto', // Add margin-top to lower the chat box
-    border: '1px solid #ccc',
-    borderRadius: '8px',
-    overflow: 'hidden',
-    display: 'flex',
-    flexDirection: 'column',
-    height: '70vh' // Adjust height to fit mobile screens better and not take full screen
-  },
-  messagesContainer: {
-    flex: 1,
-    padding: '10px',
-    overflowY: 'scroll',
-    backgroundColor: '#f9f9f9'
-  },
-  message: {
-    marginBottom: '10px',
-    padding: '8px',
-    borderRadius: '4px',
-    maxWidth: '75%',
-    wordBreak: 'break-word'
-  },
-  input: {
-    padding: '10px',
-    fontSize: '16px',
-    border: 'none',
-    borderTop: '1px solid #ccc',
-    outline: 'none'
-  },
-  error: {
-    color: 'red',
-    textAlign: 'center',
-    margin: '10px 0'
-  }
 };
 
 export default ChatInterface;

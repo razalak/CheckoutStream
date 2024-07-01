@@ -1,16 +1,30 @@
-// src/App.js
-import React from 'react';
-import './App.css'; // Optional: Import your CSS or styling here
-import ChatInterface from './components/ChatInterface';
+// App.js
+import React, { useState } from 'react';
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  Navigate
+} from 'react-router-dom';
+import Loginpage from '../src/components/Loginpage';
+import ChatInterface from '../src/components/ChatInterface';
 
-function App() {
+const App = () => {
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  const handleLogin = () => {
+    setIsLoggedIn(true);
+  };
+
   return (
-    <div className="App">
-      <main className="App-main">
-        <ChatInterface />
-      </main>
-    </div>
+    <Router>
+      <Routes>
+        <Route path="/login" element={<Loginpage onLogin={handleLogin} />} />
+        <Route path="/chat" element={isLoggedIn ? <ChatInterface /> : <Navigate to="/login" />} />
+        <Route path="/" element={<Navigate to="/login" />} />
+      </Routes>
+    </Router>
   );
-}
+};
 
 export default App;
