@@ -62,12 +62,23 @@ const extractOrderData = (message) => {
     const assignData = (field, value) => {
         switch (field) {
             case 'Name':
-                const names = value.trim().split(' ');
-                orderData.billing.first_name = names[0] || null;
-                orderData.billing.last_name = names.slice(1).join(' ') || null;
-                orderData.shipping.first_name = names[0] || null;
-                orderData.shipping.last_name = names.slice(1).join(' ') || null;
-                break;
+            const names = value.trim().split(/\s+/); // Split by any whitespace
+            console.log('Names Array:', names);
+            if (names.length === 1) {
+                // If only one name is provided, treat it as the first name
+                orderData.billing.first_name = names[0];
+                orderData.billing.last_name = "Mr."; // Defaulting to Mr. for single names
+                orderData.shipping.first_name = names[0];
+                orderData.shipping.last_name = "Mr."; // Defaulting to Mr. for single names
+            } else {
+                // If multiple names are provided, treat the first as first_name and the rest as last_name
+                orderData.billing.first_name = names.shift() || null;
+                orderData.billing.last_name = names.join(' ') || null;
+                orderData.shipping.first_name = orderData.billing.first_name;
+                orderData.shipping.last_name = orderData.billing.last_name;
+            }
+            break;
+
             case 'Email':
                 orderData.billing.email = value.trim() || null;
                 orderData.shipping.email = value.trim() || null;

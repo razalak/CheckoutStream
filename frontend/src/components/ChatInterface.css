@@ -1,0 +1,53 @@
+.chat-container {
+  width: 100%;
+  max-width: 480px; /* Suitable for mobile screens */
+  margin: 110px auto 20px auto; /* Add margin-top to lower the chat box */
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  height: 70vh; /* Adjust height to fit mobile screens better and not take full screen */
+  box-sizing: border-box; /* Ensure padding and border are included in the element's total width and height */
+}
+
+.messages-container {
+  flex: 1 1 auto;
+  padding: 10px;
+  overflow-y: auto; /* Use auto instead of scroll to only show scrollbar when needed */
+  background-color: #f9f9f9;
+  box-sizing: border-box; /* Ensure padding is included in the element's total width and height */
+}
+
+.message {
+  margin-bottom: 10px;
+  padding: 8px;
+  border-radius: 4px;
+  max-width: 75%;
+  word-break: break-word;
+}
+
+.user-message {
+  text-align: right;
+  background-color: #e1ffc7; /* Orange color for user messages */
+}
+
+.server-message {
+  text-align: left;
+  background-color: #ffa500; /* Orange color for server messages */
+}
+
+.input {
+  padding: 10px;
+  font-size: 16px;
+  border: none;
+  border-top: 1px solid #ccc;
+  outline: none;
+  box-sizing: border-box; /* Ensure padding is included in the element's total width and height */
+}
+
+.error {
+  color: red;
+  text-align: center;
+  margin: 10px 0;
+}
